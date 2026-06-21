@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Я тебя люблю ❤️</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            user-select: none;
+        }
+
+        body {
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(145deg, #2b0b1a 0%, #4a1a2e 100%);
+            font-family: 'Segoe UI', Roboto, system-ui, -apple-system, sans-serif;
+            padding: 20px;
+            margin: 0;
+        }
+
+        .card {
+            background: rgba(255, 245, 245, 0.1);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-radius: 60px 60px 40px 40px;
+            padding: 40px 30px 50px;
+            max-width: 550px;
+            width: 100%;
+            box-shadow: 0 30px 50px rgba(0, 0, 0, 0.6), 0 0 0 1px rgba(255, 200, 200, 0.2);
+            text-align: center;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 120, 150, 0.3);
+        }
+
+        h1 {
+            font-size: 4rem;
+            font-weight: 700;
+            color: #ffe2ea;
+            text-shadow: 0 4px 20px rgba(255, 80, 120, 0.7), 0 0 40px #ff3b6f;
+            letter-spacing: 2px;
+            margin-bottom: 20px;
+            word-break: break-word;
+        }
+
+        .sub-message {
+            font-size: 1.2rem;
+            color: #ffd6e0;
+            opacity: 0.9;
+            margin-bottom: 30px;
+            font-weight: 300;
+            letter-spacing: 1px;
+        }
+
+        .btn-group {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 25px 30px;
+            margin: 35px 0 20px;
+            position: relative;
+            min-height: 70px;
+        }
+
+        .btn {
+            border: none;
+            padding: 16px 40px;
+            font-size: 1.7rem;
+            font-weight: 700;
+            border-radius: 60px;
+            cursor: pointer;
+            transition: 0.2s ease;
+            box-shadow: 0 8px 0 rgba(0, 0, 0, 0.2);
+            letter-spacing: 1px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-width: 170px;
+            background: white;
+            color: #2d0a16;
+            border: 2px solid rgba(255, 255, 255, 0.5);
+        }
+
+        .btn-yes {
+            background: #ff4777;
+            color: white;
+            border: 2px solid #ff8aab;
+            box-shadow: 0 8px 0 #a0214b, 0 0 20px #ff3b6f88;
+        }
+
+        .btn-yes:hover {
+            transform: scale(1.03);
+            background: #ff5a85;
+            box-shadow: 0 8px 0 #a0214b, 0 0 35px #ff3b6f;
+        }
+
+        .btn-no {
+            background: #3d2a33;
+            color: #f0d0d8;
+            border: 2px solid #7a4b5a;
+            box-shadow: 0 8px 0 #1d1016;
+            position: relative;
+            transition: 0.08s linear;
+            cursor: pointer;
+        }
+
+        .btn-no:hover {
+            background: #523a45;
+        }
+
+        .btn-no:active {
+            transform: scale(0.95);
+        }
+
+        /* Контейнер для сердца */
+        .heart-container {
+            margin-top: 30px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 120px;
+        }
+
+        .heart {
+            font-size: 5.5rem;
+            display: inline-block;
+            animation: spinHeart 3s linear infinite;
+            filter: drop-shadow(0 0 30px #ff2a5e);
+            color: #ff3366;
+            transition: 0.3s;
+            text-shadow: 0 0 40px #ff1a4f;
+            transform-origin: center;
+        }
+
+        @keyframes spinHeart {
+            0% { transform: rotate(0deg) scale(1); }
+            25% { transform: rotate(5deg) scale(1.1); }
+            50% { transform: rotate(0deg) scale(1); }
+            75% { transform: rotate(-5deg) scale(1.1); }
+            100% { transform: rotate(0deg) scale(1); }
+        }
+
+        /* Дополнительное вращение с осями */
+        .heart.spinning {
+            animation: spinFull 2s cubic-bezier(0.6, 0.0, 0.4, 1) infinite;
+        }
+
+        @keyframes spinFull {
+            0% { transform: rotate(0deg) scale(1); }
+            25% { transform: rotate(10deg) scale(1.2); }
+            50% { transform: rotate(0deg) scale(1.1); }
+            75% { transform: rotate(-10deg) scale(1.2); }
+            100% { transform: rotate(0deg) scale(1); }
+        }
+
+        /* Адаптив */
+        @media (max-width: 500px) {
+            .card { padding: 30px 18px 40px; }
+            h1 { font-size: 3rem; }
+            .btn { min-width: 140px; padding: 14px 20px; font-size: 1.4rem; }
+            .btn-group { gap: 15px; }
+            .heart { font-size: 4.5rem; }
+        }
+
+        /* Скрытые состояния */
+        .hidden {
+            display: none !important;
+        }
+
+        .fade-in {
+            animation: fadeIn 0.5s ease;
+        }
+
+        @keyframes fadeIn {
+            0% { opacity: 0; transform: scale(0.8); }
+            100% { opacity: 1; transform: scale(1); }
+        }
+
+        .btn-no--escape {
+            transition: 0.08s linear;
+        }
+
+        /* Стиль для текста "Продолжить любить" после клика */
+        .loved-message {
+            font-size: 1.8rem;
+            color: #ffb3c9;
+            margin: 15px 0 5px;
+            font-weight: 500;
+            letter-spacing: 1px;
+            text-shadow: 0 0 20px #ff3366;
+        }
+    </style>
+</head>
+<body>
+
+<div class="card" id="appCard">
+    <!-- Главный заголовок -->
+    <h1 id="mainTitle">💗 Я тебя люблю</h1>
+    
+    <!-- Подзаголовок / состояние -->
+    <div id="subMessage" class="sub-message">Ты — моё всё ❤️</div>
+
+    <!-- Блок кнопок -->
+    <div class="btn-group" id="buttonGroup">
+        <button class="btn btn-yes" id="btnYes">Продолжить любить</button>
+        <button class="btn btn-no" id="btnNo">Нет</button>
+    </div>
+
+    <!-- Контейнер для сердца (появляется после клика) -->
+    <div id="heartContainer" class="heart-container hidden">
+        <span class="heart spinning" id="heartEmoji">💖</span>
+    </div>
+
+    <!-- Доп. сообщение после клика -->
+    <div id="lovedText" class="loved-message hidden">✨ Навсегда ✨</div>
+</div>
+
+<script>
+    (function() {
+        'use strict';
+
+        const btnYes = document.getElementById('btnYes');
+        const btnNo = document.getElementById('btnNo');
+        const heartContainer = document.getElementById('heartContainer');
+        const heartEmoji = document.getElementById('heartEmoji');
+        const lovedText = document.getElementById('lovedText');
+        const mainTitle = document.getElementById('mainTitle');
+        const subMessage = document.getElementById('subMessage');
+        const buttonGroup = document.getElementById('buttonGroup');
+
+        // Переменная для отслеживания режима "любви"
+        let isLovedMode = false;
+
+        // Функция, которая активирует режим "любви" (сердце + текст)
+        function activateLoveMode() {
+            if (isLovedMode) return; // уже активно
+
+            isLovedMode = true;
+
+            // Прячем кнопки (они не нужны)
+            buttonGroup.classList.add('hidden');
+
+            // Показываем контейнер с сердцем
+            heartContainer.classList.remove('hidden');
+            heartContainer.classList.add('fade-in');
+
+            // Показываем дополнительный текст
+            lovedText.classList.remove('hidden');
+            lovedText.classList.add('fade-in');
+
+            // Изменяем заголовок и подзаголовок (добавляем романтики)
+            mainTitle.textContent = '❤️‍🔥 Я тебя люблю ❤️‍🔥';
+            subMessage.textContent = 'Ты — моя вселенная ✨';
+
+            // Можно добавить небольшую паузу для анимации
+            // Сердце уже крутится (класс spinning задан по умолчанию в html)
+            // Но на всякий случай перезапустим анимацию
+            heartEmoji.style.animation = 'none';
+            heartEmoji.offsetHeight; // reflow
+            heartEmoji.style.animation = 'spinFull 2s cubic-bezier(0.6, 0.0, 0.4, 1) infinite';
+        }
+
+        // --- Обработчик для кнопки "Продолжить любить" ---
+        btnYes.addEventListener('click', function(e) {
+            e.preventDefault();
+            activateLoveMode();
+        });
+
+        // --- Убегающая кнопка "Нет" ---
+        // Хитрость: при наведении (mouseover) или касании (touchstart) кнопка смещается
+        // Также она смещается при попытке клика (чтобы не дать нажать)
+
+        function moveButtonNo() {
+            // Если уже в режиме любви — кнопка скрыта, ничего не делаем
+            if (isLovedMode) return;
+
+            const card = document.getElementById('appCard');
+            const cardRect = card.getBoundingClientRect();
+            const btnRect = btnNo.getBoundingClientRect();
+
+            // Размеры карточки и кнопки
+            const cardWidth = cardRect.width;
+            const cardHeight = cardRect.height;
+            const btnWidth = btnNo.offsetWidth;
+            const btnHeight = btnNo.offsetHeight;
+
+            // Вычисляем доступное пространство внутри карточки (с отступами)
+            // Учитываем, что кнопка находится внутри .btn-group, но мы используем относительное позиционирование
+            // Чтобы не выйти за края карточки, ограничим перемещение
+            const paddingX = 20;
+            const paddingY = 20;
+
+            // Максимальные координаты для левого верхнего угла кнопки относительно родителя (.card)
+            // родитель .card, но кнопка внутри .btn-group, который имеет margin и т.д.
+            // Проще использовать смещение через transform: translate, чтобы не вылезать за края карточки
+            // Получим текущий translate или 0
+            let currentTransform = btnNo.style.transform;
+            let currentX = 0, currentY = 0;
+            if (currentTransform && currentTransform.startsWith('translate(')) {
+                const parts = currentTransform.match(/translate\(([^,]+),\s*([^)]+)\)/);
+                if (parts) {
+                    currentX = parseFloat(parts[1]) || 0;
+                    currentY = parseFloat(parts[2]) || 0;
+                }
+            }
+
+            // Генерируем случайное смещение в пределах карточки
+            // Но нужно, чтобы кнопка не выходила за границы карточки.
+            // Используем относительное смещение от текущего положения.
+            // Чтобы сделать перемещение более хаотичным, но в пределах видимой области.
+            const maxOffsetX = (cardWidth - btnWidth) / 2 - 10;
+            const maxOffsetY = (cardHeight - btnHeight) / 2 - 20;
+
+            // Случайное смещение от -max до +max, но не слишком маленькое
+            let newX = (Math.random() * 2 - 1) * maxOffsetX * 0.9;
+            let newY = (Math.random() * 2 - 1) * maxOffsetY * 0.9;
+
+            // Ограничим, чтобы кнопка не улетала слишком далеко, но оставалась в пределах карточки
+            // Также учтём текущее положение, чтобы не выйти за границы карточки
+            // Но мы используем transform, поэтому просто проверим что итоговое смещение не выводит кнопку за пределы
+            // Для простоты ограничим newX и newY в разумных пределах
+            const clamp = (val, min, max) => Math.min(max, Math.max(min, val));
+            // Ограничим newX и newY чтобы кнопка гарантированно была видна
+            // Используем примерные значения, т.к. карточка может быть разных размеров
+            const limitX = (cardWidth - btnWidth) / 2 - 5;
+            const limitY = (cardHeight - btnHeight) / 2 - 15;
+            newX = clamp(newX, -limitX, limitX);
+            newY = clamp(newY, -limitY, limitY);
+
+            // Применяем трансформацию
+            btnNo.style.transform = `translate(${newX}px, ${newY}px)`;
+            btnNo.style.transition = 'transform 0.12s ease';
+        }
+
+        // При наведении мыши убегаем
+        btnNo.addEventListener('mouseover', function(e) {
+            if (!isLovedMode) {
+                moveButtonNo();
+            }
+        });
+
+        // При попытке клика тоже убегаем (и отменяем клик)
+        btnNo.addEventListener('click', function(e) {
+            if (!isLovedMode) {
+                e.preventDefault();
+                e.stopPropagation();
+                moveButtonNo();
+                // Дополнительно: небольшой "испуг" для кнопки
+                btnNo.style.transform += ' scale(0.9)';
+                setTimeout(() => {
+                    if (!isLovedMode) {
+                        btnNo.style.transform = btnNo.style.transform.replace(' scale(0.9)', '');
+                    }
+                }, 100);
+                return false;
+            }
+        });
+
+        // Для мобильных: touchstart также вызывает перемещение
+        btnNo.addEventListener('touchstart', function(e) {
+            if (!isLovedMode) {
+                e.preventDefault();
+                moveButtonNo();
+            }
+        }, { passive: false });
+
+        // Дополнительно: если кнопка все же была нажата (редкий случай) — активируем любовь
+        // но по логике она должна убегать, но на всякий случай
+        btnNo.addEventListener('mousedown', function(e) {
+            if (!isLovedMode) {
+                e.preventDefault();
+                moveButtonNo();
+            }
+        });
+
+        // Если кнопка "Нет" получает фокус (например, через tab) — тоже убегаем
+        btnNo.addEventListener('focus', function(e) {
+            if (!isLovedMode) {
+                moveButtonNo();
+            }
+        });
+
+        // Также принудительно перемещаем при загрузке, чтобы сразу была "непослушной"
+        window.addEventListener('load', function() {
+            // Небольшая задержка, чтобы карточка отрисовалась
+            setTimeout(() => {
+                if (!isLovedMode) {
+                    // переместим кнопку в случайное место при старте
+                    moveButtonNo();
+                }
+            }, 200);
+        });
+
+        // Адаптация при изменении размера окна: если кнопка видна, перемещаем её, чтобы не выходила за границы
+        window.addEventListener('resize', function() {
+            if (!isLovedMode && !btnNo.classList.contains('hidden')) {
+                // Сбросим transform, чтобы пересчитать относительно новых размеров
+                btnNo.style.transform = 'translate(0px, 0px)';
+                // И переместим заново
+                moveButtonNo();
+            }
+        });
+
+        // Инициализация: скрыть сердце и текст, если они по ошибке видны
+        heartContainer.classList.add('hidden');
+        lovedText.classList.add('hidden');
+        // Убедимся что кнопки видны
+        buttonGroup.classList.remove('hidden');
+
+        // Дополнительно: при двойном клике на "Нет" — тоже убегаем
+        // Но уже обработано через click
+
+        console.log('❤️ Сердце готово любить!');
+    })();
+</script>
+
+</body>
+</html>
